@@ -1,12 +1,23 @@
 // Add your code here
-Function submitData  (name, email);{
-  const url=http://localhost:3000/users
-const= requestOption {
-  headers:{
-    "Content-Type":
-    "applecation/JSON",
-    "Accept": "applecation/JSON"
-};
-  body: JSON.stringify(name:name , email:email)
-};
-fetch(http://localhost:3000/users, reaquestOption)
+function submitData( name, email ) {
+  return fetch( 'http://localhost:3000/users', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify( {
+        name,
+        email
+      } )
+    } )
+    .then( function ( response ) {
+      return response.json()
+    } )
+    .then( function ( object ) {
+      document.body.innerHTML = object[ "id" ]
+    } )
+    .catch( function ( error ) {
+      document.body.innerHTML = error.message
+    } )
+}
